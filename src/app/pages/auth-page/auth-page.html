@@ -1,0 +1,19 @@
+<section class="relative flex items-center justify-center h-screen bg-cover bg-center bg-no-repeat" 
+  style="background-image: url('../../../assets/images/authpageimage.png');">
+  
+  <!-- Background Fade Effect (Stronger Center Darkening) -->
+  <div class="absolute inset-0 bg-black/40"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/40 to-transparent"></div>
+
+  <!-- Content -->
+  <div class="relative text-center text-white px-6">
+    <!-- Title -->
+    <h2 class="mt-6 text-6xl font-extrabold font-serif">Digital Library</h2>
+    <p class="mt-4 text-2xl font-serif">Access a world of knowledge anytime, anywhere.</p>
+
+    <div class="mt-10 flex justify-center space-x-6">
+      <a (click)="login()" class="px-10 py-4 text-xl bg-pink-400 text-white rounded hover:bg-pink-700">Login</a>
+      <a (click)="register()" class="px-10 py-4 text-xl bg-pink-400 text-white rounded hover:bg-pink-700">Register</a>
+    </div>
+  </div>
+</section>
