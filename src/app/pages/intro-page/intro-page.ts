@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { KeycloakService } from 'keycloak-angular';
 import { HeaderComponent } from "../shared/header/header.component";
-import { HomePageComponent } from "../home-page/home-page.component";
+import { CategoryComponent } from "../category-component/category-component";
 
 @Component({
   selector: 'app-intro-page',
   standalone: true,
-  imports: [HeaderComponent, HomePageComponent],
+  imports: [HeaderComponent, CategoryComponent],
   templateUrl: './intro-page.html',
   styleUrls: ['./intro-page.css']
 })
