@@ -1,0 +1,34 @@
+
+
+
+  
+
+
+
+
+
+  @keyframes floatEffect {
+    0%, 100% {
+        transform: rotate(6deg) translateY(0);
+    }
+    50% {
+        transform: rotate(0deg) translateY(-20px);
+    }
+}
+
+@keyframes floatEffectReverse {
+    0%, 100% {
+        transform: rotate(-12deg) translateY(0);
+    }
+    50% {
+        transform: rotate(0deg) translateY(-20px);
+    }
+}
+
+.animate-float {
+    animation: floatEffect 5s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+    animation: floatEffectReverse 5s ease-in-out infinite;
+}
