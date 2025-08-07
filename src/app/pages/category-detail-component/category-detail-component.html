@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h3>Publications</h3>
+
+  <!-- Badges -->
+  <div class="mb-3">
+    <button
+      class="btn btn-sm me-2"
+      [class.btn-primary]="!selectedType"
+      [class.btn-outline-secondary]="selectedType"
+      (click)="filterByType(null)">
+      All
+    </button>
+
+    <button
+      class="btn btn-sm me-2"
+      [class.btn-primary]="selectedType?.id === type.id"
+      [class.btn-outline-secondary]="selectedType?.id !== type.id"
+      *ngFor="let type of types"
+      (click)="filterByType(type)">
+      {{ type.name }}
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="alert alert-info">Loading publications...</div>
+
+  <!-- Publications List -->
+  <div *ngIf="!loading" class="row">
+    <div *ngFor="let pub of filteredPublications" class="col-md-4 mb-3">
+      <div class="card">
+        <!-- Cover Image Placeholder -->
+        <div class="card-body">
+          <h5 class="card-title">{{ pub.title }}</h5>
+          <p class="card-text small">{{ pub.description }}</p>
+          <button class="btn btn-sm btn-success" (click)="openPdf(pub.id)">
+            Read PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && filteredPublications.length === 0" class="text-muted">
+    No publications found.
+  </div>
+</div>

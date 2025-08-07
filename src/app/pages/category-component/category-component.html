@@ -1,26 +1,25 @@
-@if (categories != null) {
-  <div class="p-10 flex flex-wrap items-center justify-center gap-8 mt-20">
-    @for (c of categories; track $index) {
-      <div class="group relative flex-shrink-0 w-72 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-
-        <!-- Image Section -->
-        <div class="flex justify-center -mt-14">
-          <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg transform transition-transform duration-300 group-hover:scale-105">
-            <img 
-              [src]="c.imageUrl" 
-              alt="Category image"
-              class="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        <!-- Content Section -->
-        <div class="px-6 pt-6 pb-8 text-center">
-          <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ c.name }}</h3>
-        </div>
-
+<div *ngIf="categories && categories.length > 0" class="p-10 flex flex-wrap items-center justify-center gap-8 mt-20">
+  <div 
+    *ngFor="let c of categories; index as i" 
+    class="group relative flex-shrink-0 w-72 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
+  >
+    <!-- Image Section -->
+    <div class="flex justify-center -mt-14">
+      <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+        <img 
+          [src]="c.imageUrl" 
+          alt="Category image"
+          class="w-full h-full object-cover"
+        />
       </div>
-    }
-    
+    </div>
+
+    <!-- Content Section -->
+    <div class="px-6 pt-6 pb-8 text-center">
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ c.name }}</h3>
+    </div>
+
+    <!-- Router Link (Wrapped or added as clickable area) -->
+    <a [routerLink]="['/category', c.id, 'details']" class="absolute inset-0"></a>
   </div>
-}
+</div>

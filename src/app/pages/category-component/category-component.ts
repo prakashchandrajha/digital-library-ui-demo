@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Category, CategoryService } from '../../services/category-service';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-category-component',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './category-component.html',
   styleUrl: './category-component.css'
 })
