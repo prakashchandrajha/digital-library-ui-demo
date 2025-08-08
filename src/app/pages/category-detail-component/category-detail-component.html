@@ -47,3 +47,88 @@
 
 
 
+<app-header></app-header>
+
+<div class="animated-gradient"
+    [ngStyle]="{
+        'background': 'url(assets/images/pop13.png) no-repeat center center',
+        'background-size': 'cover'
+    }">
+    <div class="mx-auto flex flex-col items-center py-12 sm:py-24 wave-container">
+        <div class="w-11/12 sm:w-2/3 lg:flex justify-center items-center flex-col mb-5 sm:mb-10">
+            <h1 class="text-4xl sm:text-5xl md:text-5xl lg:text-5xl xl:text-6xl text-center text-gray-800 dark:text-black font-black">
+                Unlock Limitless Knowledge –  
+                <br>
+                <span class="typewriter-container">
+                    <span class="text-orange-600 dark:text-orange-400">Digital</span>
+                    <span class="typewriter">Library</span>
+                </span>
+            </h1>
+            <p class="mt-5 sm:mt-10 lg:w-10/12 text-gray-600 dark:text-gray-300 font-normal text-center text-xl fade-text">
+                "Explore. Discover. Grow – Knowledge at Your Fingertips!"
+            </p>
+        </div>
+
+        <div class="flex w-11/12 md:w-8/12 xl:w-6/12 mb-4">
+            <div class="flex rounded-md w-full">
+                <input type="text" name="q"
+                    class="w-full p-3 rounded-md rounded-r-none border-2 border-gray-300 placeholder-current dark:bg-gray-200 dark:text-gray-700 dark:border-gray-300"
+                    placeholder="Search by keyword..."  />
+                <button
+                    class="inline-flex items-center gap-2 bg-orange-600 text-white text-lg font-semibold py-3 px-6 rounded-r-md animate-pulse">
+                    <span>Search</span>
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-wrap gap-4 mb-4">
+          @for (type of types; track $index) {
+            <span class="border border-blue-600 rounded-full px-4 py-1 text-sm text-blue-600 cursor-pointer" (click)="filterByType(type)" >{{ type.name }}</span>
+          }
+            
+            
+    </div>
+</div>
+</div>
+
+@if(!loading){
+  @for (pub of filteredPublications; track $index) {
+    <div class="flex mt-10 items-center justify-center w-full">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 w-11/12">
+    
+    <!-- Repeat this card 5 times -->
+    <div class="rounded-xl overflow-hidden relative text-center p-4 group flex flex-col hover:shadow-2xl transition-all duration-500 shadow-xl" >
+        
+        <!-- Top-left border effect -->
+        <div class="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-pink-500 rounded-tl-2xl"></div>
+
+        <!-- Top-right border effect -->
+        <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-red-400 rounded-tr-2xl"></div>
+
+        <!-- Bottom-left border effect -->
+        <div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-yellow-500 rounded-bl-2xl"></div>
+
+        <!-- Bottom-right border effect -->
+        <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-pink-500 rounded-br-2xl"></div>
+
+        <div class="group-hover:scale-105 transition-all duration-500">
+            <img  alt="Book Cover" class="w-full h-64 object-fit">
+        </div>
+        <div class="mt-4">
+            <h1 class="font-semibold text-xl text-gray-700">{{ pub.title }}</h1>
+            <p class="text-gray-500 text-sm">{{ pub.description }}</p>
+        </div>
+        <div class="mt-6 absolute bottom-4 left-1/2 -translate-x-1/2 transform transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bottom-6">
+            <button class="w-14 h-14 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300" >
+                <span class="text-sm" (click)="openPdf(pub.id)">Read More</span>
+            </button>
+        </div>
+        
+    </div>
+  </div>
+</div>
+  }  
+}
+
+
+
+

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Publication, PublicationService, PublicationType } from '../../services/PublicationService';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../shared/header/header.component';
 
 @Component({
   selector: 'app-category-detail-component',
-  imports: [CommonModule],
+  imports: [CommonModule,HeaderComponent],
   templateUrl: './category-detail-component.html',
   styleUrl: './category-detail-component.css'
 })
