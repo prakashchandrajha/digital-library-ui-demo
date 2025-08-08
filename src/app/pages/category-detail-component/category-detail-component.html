@@ -44,43 +44,45 @@
 </div>
 </div>
 
-@if(!loading){
-  @for (pub of filteredPublications; track $index) {
-    <div class="flex mt-10 items-center justify-center w-full">
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 w-11/12">
-    
-    <!-- Repeat this card 5 times -->
-    <div class="rounded-xl overflow-hidden relative text-center p-4 group flex flex-col hover:shadow-2xl transition-all duration-500 shadow-xl" >
-        
-        <!-- Top-left border effect -->
-        <div class="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-pink-500 rounded-tl-2xl"></div>
+@if (!loading) {
+  <div class="flex mt-10 items-center justify-center w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 gap-6 w-11/12">
+      
+      @for (pub of filteredPublications; track $index) {
+        <div class="rounded-xl overflow-hidden relative text-center p-4 group flex flex-col hover:shadow-2xl transition-all duration-500 shadow-xl">
+            
+          <!-- Top-left border effect -->
+          <div class="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-pink-500 rounded-tl-2xl"></div>
 
-        <!-- Top-right border effect -->
-        <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-red-400 rounded-tr-2xl"></div>
+          <!-- Top-right border effect -->
+          <div class="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-red-400 rounded-tr-2xl"></div>
 
-        <!-- Bottom-left border effect -->
-        <div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-yellow-500 rounded-bl-2xl"></div>
+          <!-- Bottom-left border effect -->
+          <div class="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-yellow-500 rounded-bl-2xl"></div>
 
-        <!-- Bottom-right border effect -->
-        <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-pink-500 rounded-br-2xl"></div>
+          <!-- Bottom-right border effect -->
+          <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-pink-500 rounded-br-2xl"></div>
 
-        <div class="group-hover:scale-105 transition-all duration-500">
+          <div class="group-hover:scale-105 transition-all duration-500">
             <img [src]="publicationService.getCoverImageUrl(pub.id)" alt="Book Cover" class="w-full h-64 object-fit">
-        </div>
-        <div class="mt-4">
+          </div>
+
+          <div class="mt-4">
             <h1 class="font-semibold text-xl text-gray-700">{{ pub.title }}</h1>
             <p class="text-gray-500 text-sm">{{ pub.description }}</p>
-        </div>
-        <div class="mt-6 absolute bottom-4 left-1/2 -translate-x-1/2 transform transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bottom-6">
-            <button class="w-14 h-14 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300" >
-                <span class="text-sm" (click)="openPdf(pub.id)">Read More</span>
+          </div>
+
+          <div class="mt-6 absolute bottom-4 left-1/2 -translate-x-1/2 transform transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:bottom-6">
+            <button class="w-14 h-14 bg-gradient-to-r from-pink-500 to-orange-500 text-white font-semibold rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300">
+              <span class="text-sm" (click)="openPdf(pub.id)">Read More</span>
             </button>
+          </div>
+
         </div>
-        
+      }
+
     </div>
   </div>
-</div>
-  }  
 }
 
 
