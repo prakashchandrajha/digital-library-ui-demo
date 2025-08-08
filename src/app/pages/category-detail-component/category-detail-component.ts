@@ -6,7 +6,7 @@ import { HeaderComponent } from '../shared/header/header.component';
 
 @Component({
   selector: 'app-category-detail-component',
-  imports: [CommonModule,HeaderComponent],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './category-detail-component.html',
   styleUrl: './category-detail-component.css'
 })
@@ -21,7 +21,7 @@ export class CategoryDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private publicationService: PublicationService
+    public publicationService: PublicationService
   ) {
     this.categoryId = +this.route.snapshot.paramMap.get('id')!;
   }

@@ -47,4 +47,8 @@ export class PublicationService {
       responseType: 'blob'
     });
   }
+
+  getCoverImageUrl(publicationId: number): string {
+  return `http://localhost:8080/backend/api/publications/${publicationId}/cover`;
+}
 }

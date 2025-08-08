@@ -52,3 +52,19 @@ Prior to version 23.0, the `keycloak-js` adapter was released in lockstep with t
 Starting with Keycloak 23.0, the `keycloak-js` adapter has been decoupled from the Keycloak server and is now released on its own schedule. This allows for more frequent updates and bug fixes for the adapter, independent of the server release cycle.
 
 The version of `keycloak-js` was jumped from 22.x to 26.2.0 to clearly signify this change. **There are no breaking functional changes between `keycloak-js` 22.x and 26.2.0.** The adapter remains backward compatible with all actively supported releases of the Keycloak server.
+
+
+
+
+<div *ngFor="let pub of filteredPublications" class="card">
+  <!-- Thumbnail Image -->
+  <img 
+    [src]="publicationService.getCoverImageUrl(pub.id)" 
+    alt="Cover"
+    class="thumbnail"
+    onError="this.onerror=null; this.src='assets/placeholders/placeholder-image.png';"
+  >
+
+  <h5>{{ pub.title }}</h5>
+  <button (click)="openPdf(pub.id)">Read PDF</button>
+</div>

@@ -1,49 +1,3 @@
-<div class="container mt-4">
-  <h3>Publications</h3>
-
-  <!-- Badges -->
-  <div class="mb-3">
-    <button
-      class="btn btn-sm me-2"
-      [class.btn-primary]="!selectedType"
-      [class.btn-outline-secondary]="selectedType"
-      (click)="filterByType(null)">
-      All
-    </button>
-
-    <button
-      class="btn btn-sm me-2"
-      [class.btn-primary]="selectedType?.id === type.id"
-      [class.btn-outline-secondary]="selectedType?.id !== type.id"
-      *ngFor="let type of types"
-      (click)="filterByType(type)">
-      {{ type.name }}
-    </button>
-  </div>
-
-  <!-- Loading -->
-  <div *ngIf="loading" class="alert alert-info">Loading publications...</div>
-
-  <!-- Publications List -->
-  <div *ngIf="!loading" class="row">
-    <div *ngFor="let pub of filteredPublications" class="col-md-4 mb-3">
-      <div class="card">
-        <!-- Cover Image Placeholder -->
-        <div class="card-body">
-          <h5 class="card-title">{{ pub.title }}</h5>
-          <p class="card-text small">{{ pub.description }}</p>
-          <button class="btn btn-sm btn-success" (click)="openPdf(pub.id)">
-            Read PDF
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="!loading && filteredPublications.length === 0" class="text-muted">
-    No publications found.
-  </div>
-</div>
 
 
 
@@ -82,7 +36,7 @@
         </div>
         <div class="flex flex-wrap gap-4 mb-4">
           @for (type of types; track $index) {
-            <span class="border border-blue-600 rounded-full px-4 py-1 text-sm text-blue-600 cursor-pointer" (click)="filterByType(type)" >{{ type.name }}</span>
+            <span class="border border-blue-600 rounded-full px-4 py-1 text-sm text-blue-600 cursor-pointer" (click)="filterByType(type)" >{{ type.name|uppercase }}</span>
           }
             
             
@@ -111,7 +65,7 @@
         <div class="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-pink-500 rounded-br-2xl"></div>
 
         <div class="group-hover:scale-105 transition-all duration-500">
-            <img  alt="Book Cover" class="w-full h-64 object-fit">
+            <img [src]="publicationService.getCoverImageUrl(pub.id)" alt="Book Cover" class="w-full h-64 object-fit">
         </div>
         <div class="mt-4">
             <h1 class="font-semibold text-xl text-gray-700">{{ pub.title }}</h1>
