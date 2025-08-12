@@ -35,9 +35,20 @@
             </div>
         </div>
         <div class="flex flex-wrap gap-4 mb-4">
-          @for (type of types; track $index) {
-            <span class="border border-blue-600 rounded-full px-4 py-1 text-sm text-blue-600 cursor-pointer" (click)="filterByType(type)" >{{ type.name|uppercase }}</span>
-          }
+         @for (type of types; track $index) {
+  <span
+    class="rounded-full px-4 py-1 text-sm font-medium cursor-pointer transition-all duration-300"
+    [ngClass]="
+      selectedType?.id === type.id
+        ? 'bg-gradient-to-r from-pink-500 via-orange-500 to-pink-500 text-white shadow-md scale-105'
+        : 'border border-pink-500 text-pink-500 hover:bg-gradient-to-r hover:from-pink-500 hover:via-orange-500 hover:to-pink-500 hover:text-white'
+    "
+    (click)="filterByType(type)"
+  >
+    {{ type.name | uppercase }}
+  </span>
+}
+
             
             
     </div>
@@ -68,7 +79,7 @@
           </div>
 
           <div class="mt-4">
-            <h1 class="font-semibold text-xl text-gray-700">{{ pub.title }}</h1>
+            <h1 class="font-semibold text-xl text-gray-700">{{ pub.title |uppercase}}</h1>
             <p class="text-gray-500 text-sm">{{ pub.description }}</p>
           </div>
 

@@ -6,9 +6,10 @@ import { HeaderComponent } from '../shared/header/header.component';
 
 @Component({
   selector: 'app-category-detail-component',
+  standalone: true,
   imports: [CommonModule, HeaderComponent],
   templateUrl: './category-detail-component.html',
-  styleUrl: './category-detail-component.css'
+  styleUrls: ['./category-detail-component.css'] // fixed "styleUrls"
 })
 export class CategoryDetailComponent implements OnInit {
 
