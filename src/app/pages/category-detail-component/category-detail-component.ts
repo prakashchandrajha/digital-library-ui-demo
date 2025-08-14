@@ -35,6 +35,10 @@ export class CategoryDetailComponent implements OnInit {
   loadTypes() {
     this.publicationService.getPublicationTypes().subscribe(types => {
       this.types = types;
+      if (this.types.length > 0) {
+      this.selectedType = this.types[1];
+      this.filterByType(this.selectedType);
+    }
     });
   }
 

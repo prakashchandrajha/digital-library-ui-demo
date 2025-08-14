@@ -1,25 +1,38 @@
-<div *ngIf="categories && categories.length > 0" class="p-10 flex flex-wrap items-center justify-center gap-8 mt-20">
+<div 
+  *ngIf="categories && categories.length > 0" 
+  class="p-10 flex flex-wrap items-center justify-center gap-8 mt-32 overflow-visible"
+>
   <div 
     *ngFor="let c of categories; index as i" 
-    class="group relative flex-shrink-0 w-72 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
+    class="group relative flex-shrink-0 w-72 bg-white rounded-2xl shadow-md hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 overflow-visible pt-16"
   >
-    <!-- Image Section -->
-    <div class="flex justify-center -mt-14">
-      <div class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg transform transition-transform duration-300 group-hover:scale-105">
+    <!-- Floating Image -->
+    <div class="absolute -top-14 left-1/2 transform -translate-x-1/2">
+      <div 
+        class="w-28 h-28 rounded-full overflow-hidden ring-4 ring-white shadow-lg 
+               bg-gradient-to-tr from-pink-500 to-orange-400 p-1 transition-transform duration-300 group-hover:scale-105"
+      >
         <img 
           [src]="c.imageUrl" 
           alt="Category image"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover rounded-full"
         />
       </div>
     </div>
 
-    <!-- Content Section -->
-    <div class="px-6 pt-6 pb-8 text-center">
-      <h3 class="text-xl font-semibold text-gray-800 mb-2">{{ c.name|uppercase }}</h3>
+    <!-- Content -->
+    <div class="px-6 pt-12 pb-8 text-center">
+      <h3 
+        class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-pink-600 transition-colors duration-300"
+      >
+        {{ c.name | uppercase }}
+      </h3>
     </div>
 
-    <!-- Router Link (Wrapped or added as clickable area) -->
-    <a [routerLink]="['/category', c.id, 'details']" class="absolute inset-0"></a>
+    <!-- Full Clickable Area -->
+    <a 
+      [routerLink]="['/category', c.id, 'details']" 
+      class="absolute inset-0 focus:outline-none focus:ring-4 focus:ring-pink-400 rounded-2xl"
+    ></a>
   </div>
 </div>

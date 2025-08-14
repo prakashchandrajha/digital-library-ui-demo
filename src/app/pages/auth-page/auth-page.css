@@ -1,0 +1,11 @@
+  /* Outline for only the D */
+  .outlined-letter {
+    color: transparent;
+    -webkit-text-stroke: 4px black;
+  }
+
+  /* Outline for normal filled text */
+  .outlined-text {
+    color: white;
+    -webkit-text-stroke: 1.5px black;
+  }
