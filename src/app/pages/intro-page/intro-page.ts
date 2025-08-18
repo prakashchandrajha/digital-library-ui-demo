@@ -4,11 +4,12 @@ import { HeaderComponent } from "../shared/header/header.component";
 import { CategoryComponent } from "../category-component/category-component";
 import { DigitalLibaryAboutComponent } from "../digital-libary-about-component/digital-libary-about-component";
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from "../shared/footer/footer.component";
 
 @Component({
   selector: 'app-intro-page',
   standalone: true,
-  imports: [HeaderComponent, CategoryComponent, DigitalLibaryAboutComponent,CommonModule],
+  imports: [HeaderComponent, CategoryComponent, DigitalLibaryAboutComponent, CommonModule, FooterComponent],
   templateUrl: './intro-page.html',
   styleUrls: ['./intro-page.css']
 })
