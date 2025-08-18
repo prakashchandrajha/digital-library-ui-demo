@@ -40,4 +40,21 @@ export class CategoryService {
       responseType: 'blob'
     });
   }
+
+
+  // *****************************
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+// PUT: Update category
+update(id: number, name: string, file?: File) {
+  const formData = new FormData();
+  formData.append('name', name);
+  if (file) {
+    formData.append('thumbnail', file);
+  }
+  return this.http.put<Category>(`${this.apiUrl}/${id}`, formData);
+}
 }

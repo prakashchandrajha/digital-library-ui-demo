@@ -20,6 +20,8 @@ export class CategoryDetailComponent implements OnInit {
   selectedType: PublicationType | null = null;
   loading = false;
 
+  
+
   constructor(
     private route: ActivatedRoute,
     public publicationService: PublicationService
@@ -36,7 +38,7 @@ export class CategoryDetailComponent implements OnInit {
     this.publicationService.getPublicationTypes().subscribe(types => {
       this.types = types;
       if (this.types.length > 0) {
-      this.selectedType = this.types[1];
+      this.selectedType = this.types[0];
       this.filterByType(this.selectedType);
     }
     });
