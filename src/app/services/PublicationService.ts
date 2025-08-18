@@ -51,4 +51,10 @@ export class PublicationService {
   getCoverImageUrl(publicationId: number): string {
   return `http://localhost:8080/backend/api/publications/${publicationId}/cover`;
 }
+
+
+createPublication(formData: FormData): Observable<Publication> {
+  return this.http.post<Publication>(`${this.apiUrl}/publications`, formData);
+}
+
 }

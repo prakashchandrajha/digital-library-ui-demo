@@ -1,1 +1,99 @@
-<p>publication-crud-component works!</p>
+<!-- Add Publication Button -->
+<div class="bg-white p-6 rounded-xl shadow flex flex-wrap gap-4">
+  <button 
+    (click)="openAddModal()"
+    class="bg-gradient-to-r from-pink-500 to-orange-500 text-white px-6 py-3 rounded-lg shadow hover:from-pink-600 hover:to-orange-600 transition">
+    + Add Publication
+  </button>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[600px] relative max-h-[90vh] overflow-auto">
+
+    <!-- Close Button -->
+    <button 
+      class="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+      (click)="closeModal()"
+    >✖</button>
+
+    <h2 class="text-xl font-bold mb-4 text-pink-600">Add New Publication</h2>
+
+    <!-- Success / Error Messages -->
+    <div *ngIf="successMessage" class="bg-green-100 text-green-800 p-3 rounded mb-3">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="bg-red-100 text-red-800 p-3 rounded mb-3">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Reactive Form -->
+    <form [formGroup]="publicationForm" (ngSubmit)="submitPublication()" class="space-y-4" novalidate>
+
+      <!-- Category -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+        <select formControlName="categoryId" class="border p-2 rounded w-full">
+          <option value="">-- Select Category --</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+        </select>
+        <p *ngIf="submitted && publicationForm.get('categoryId')?.errors" class="text-red-600 text-sm">
+          Category is required.
+        </p>
+      </div>
+
+      <!-- Publication Type -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Publication Type</label>
+        <select formControlName="typeId" class="border p-2 rounded w-full">
+          <option value="">-- Select Type --</option>
+          <option *ngFor="let type of publicationTypes" [value]="type.id">{{ type.name }}</option>
+        </select>
+        <p *ngIf="submitted && publicationForm.get('typeId')?.errors" class="text-red-600 text-sm">
+          Type is required.
+        </p>
+      </div>
+
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+        <input type="text" formControlName="title" class="border p-2 rounded w-full" />
+        <p *ngIf="submitted && publicationForm.get('title')?.errors" class="text-red-600 text-sm">
+          Title is required.
+        </p>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <textarea formControlName="description" rows="3" class="border p-2 rounded w-full"></textarea>
+        <p *ngIf="submitted && publicationForm.get('description')?.errors" class="text-red-600 text-sm">
+          Description is required.
+        </p>
+      </div>
+
+      <!-- Cover Image -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Cover Image</label>
+        <input type="file" (change)="onCoverImageSelected($event)" accept="image/*" />
+        <p *ngIf="submitted && !coverImageFile" class="text-red-600 text-sm">
+          Cover image is required.
+        </p>
+      </div>
+
+      <!-- PDF File -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">PDF File</label>
+        <input type="file" (change)="onPdfSelected($event)" accept="application/pdf" />
+        <p *ngIf="submitted && !pdfFile" class="text-red-600 text-sm">
+          PDF file is required.
+        </p>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-3">
+        <button type="button" (click)="closeModal()" class="px-4 py-2 border rounded">Cancel</button>
+        <button type="submit" class="bg-pink-600 text-white px-4 py-2 rounded hover:bg-pink-700">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

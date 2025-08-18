@@ -11,17 +11,11 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   
-   showLogout = false;
 
    @Output() triggerParent = new EventEmitter<void>();
 
   buttonClicked() {
   this.triggerParent.emit();
-  }
-
-
-  toggleLogout() {
-    this.showLogout = !this.showLogout;
   }
 
   logout() {

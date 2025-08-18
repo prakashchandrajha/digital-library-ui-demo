@@ -3,16 +3,30 @@ import { KeycloakService } from 'keycloak-angular';
 import { HeaderComponent } from "../shared/header/header.component";
 import { CategoryComponent } from "../category-component/category-component";
 import { DigitalLibaryAboutComponent } from "../digital-libary-about-component/digital-libary-about-component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-intro-page',
   standalone: true,
-  imports: [HeaderComponent, CategoryComponent, DigitalLibaryAboutComponent],
+  imports: [HeaderComponent, CategoryComponent, DigitalLibaryAboutComponent,CommonModule],
   templateUrl: './intro-page.html',
   styleUrls: ['./intro-page.css']
 })
 export class IntroPageComponent {
   constructor(private readonly keycloak: KeycloakService) {}
+
+
+   profileIcons = [
+    { img: '../../../assets/images/ss9.jpg', position: 'left-[45px] -top-[4px]' },
+    { img: '../../../assets/images/ss7.jpg', position: 'right-[45px] -top-[4px]' },
+    { img: '../../../assets/images/ss5.jpg', position: '-left-4 top-20' },
+    { img: '../../../assets/images/ss4.jpg', position: '-right-4 top-20' },
+    { img: '../../../assets/images/ss3.jpg', position: 'bottom-8 -left-0' },
+    { img: '../../../assets/images/ss2.jpg', position: 'bottom-8 -right-0' },
+    { img: '../../../assets/images/ss1.jpg', position: 'right-[40%] -bottom-4' }
+  ];
+
+  centerImage = '../../../assets/images/ss6.jpg';
 
   public logout(): void {
     this.keycloak.logout(window.location.origin + '/auth');
