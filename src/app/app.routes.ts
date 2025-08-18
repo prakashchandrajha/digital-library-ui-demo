@@ -8,6 +8,8 @@ import { AdminDashboardContent } from './admin/admin-dashboard-content/admin-das
 import { UserCrudComponent } from './admin/user-crud-component/user-crud-component';
 import { CategoryCrudComponent } from './admin/category-crud-component/category-crud-component';
 import { PublicationCrudComponent } from './admin/publication-crud-component/publication-crud-component';
+import { AboutComponent } from './pages/about-component/about-component';
+import { ContactComponent } from './pages/contact-component/contact-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/auth', pathMatch: 'full' },
@@ -24,6 +26,16 @@ export const routes: Routes = [
   {
     path: 'home',
     component: IntroPageComponent,
+    canActivate: [AuthGuard]
+  },
+   {
+    path: 'about',
+    component: AboutComponent,
+    canActivate: [AuthGuard]
+  },
+   {
+    path: 'contact',
+    component: ContactComponent,
     canActivate: [AuthGuard]
   },
   {
