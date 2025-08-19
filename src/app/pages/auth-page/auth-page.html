@@ -15,9 +15,38 @@
 
 
 
-    <div class="mt-10 flex justify-center space-x-6">
-      <a (click)="login()" class="px-10 py-4 text-xl bg-pink-400 text-white rounded-full hover:bg-pink-700">Login</a>
-      <a (click)="register()" class="px-10 py-4 text-xl bg-pink-400 text-white rounded-full hover:bg-pink-700">Register</a>
-    </div>
+    <div class="mt-10 flex justify-center items-center space-x-6">
+  <!-- Login Button -->
+<a (click)="login()" 
+   class="cursor-pointer flex items-center gap-2 px-10 py-4 text-xl text-white rounded-full 
+          bg-gradient-to-r from-pink-400 to-red-500 
+          hover:from-pink-600 hover:to-red-700 transition">
+  <!-- New Login SVG Icon -->
+  <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 512 512">
+    <path d="M352 0H64C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H352c35.3 0 64-28.7 64-64V352c0-8.8-7.2-16-16-16s-16 7.2-16 16v96c0 17.7-14.3 32-32 32H64c-17.7 0-32-14.3-32-32V64C32 46.3 46.3 32 64 32H352c17.7 0 32 14.3 32 32V128c0 8.8 7.2 16 16 16s16-7.2 16-16V64c0-35.3-28.7-64-64-64zM505 273L409 377c-10 10-27 3-27-11V304H192c-8.8 0-16-7.2-16-16V224c0-8.8 7.2-16 16-16H382V146c0-14 17-21 27-11l96 104c6.2 6.7 6.2 17.3 0 23z"/>
+  </svg>
+  Login
+</a>
+
+
+  <!-- Register Button -->
+  <a (click)="register()" 
+     class="cursor-pointer flex items-center gap-2 px-10 py-4 text-xl text-white rounded-full 
+            bg-gradient-to-r from-pink-400 to-red-500 
+            hover:from-pink-600 hover:to-red-700 transition">
+    <!-- Register SVG Icon -->
+    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 640 512">
+      <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm51.2 32H172.8C77.4 288 0 365.4 0 460.8A51.2 51.2 0 0 0 51.2 512H396.8A51.2 51.2 0 0 0 448 460.8c0-95.4-77.4-172.8-172.8-172.8zM592 128h-48V80a16 16 0 0 0-32 0v48h-48a16 16 0 0 0 0 32h48v48a16 16 0 0 0 32 0v-48h48a16 16 0 0 0 0-32z"/>
+    </svg>
+    Register
+  </a>
+</div>
+
+
+
   </div>
 </section>
+
+
+
+
