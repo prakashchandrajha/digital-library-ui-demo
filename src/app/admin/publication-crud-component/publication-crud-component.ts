@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category, CategoryService } from '../../services/category-service';
 import { CommonModule } from '@angular/common';
-import { PublicationService, PublicationType } from '../../services/PublicationService';
+import { Publication, PublicationService, PublicationType } from '../../services/PublicationService';
 
 interface PublicationFormValue {
   categoryId: string;
@@ -21,11 +21,16 @@ interface PublicationFormValue {
 export class PublicationCrudComponent implements OnInit {
 
   isModalOpen = false;
+  isEditMode = false;
   publicationForm!: FormGroup;
   submitted = false;
 
   categories: Category[] = [];
   publicationTypes: PublicationType[] = [];
+  publications: Publication[] = [];
+  selectedCategoryId: number | null = null;
+  selectedTypeId: number | null = null;
+  currentPublicationId: number | null = null;
 
   coverImageFile: File | null = null;
   pdfFile: File | null = null;
@@ -58,10 +63,44 @@ export class PublicationCrudComponent implements OnInit {
     });
   }
 
+  loadPublicationsByCategory(categoryId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.selectedTypeId = null; // Reset type filter
+    this.publicationService.getPublicationsByCategory(categoryId).subscribe({
+      next: res => this.publications = res,
+      error: err => console.error('Failed to load publications', err)
+    });
+  }
+
+  loadPublicationsByCategoryAndType(categoryId: number, typeId: number): void {
+    this.selectedCategoryId = categoryId;
+    this.selectedTypeId = typeId;
+    this.publicationService.getPublicationsByCategoryAndType(categoryId, typeId).subscribe({
+      next: res => this.publications = res,
+      error: err => console.error('Failed to load publications', err)
+    });
+  }
+
   openAddModal(): void {
     this.isModalOpen = true;
+    this.isEditMode = false;
     this.successMessage = '';
     this.errorMessage = '';
+    this.publicationForm.reset();
+    this.submitted = false;
+  }
+
+  openEditModal(publication: Publication): void {
+    this.isModalOpen = true;
+    this.isEditMode = true;
+    this.currentPublicationId = publication.id;
+    this.successMessage = '';
+    this.errorMessage = '';
+    this.publicationForm.patchValue({
+      title: publication.title,
+      description: publication.description,
+      // You might need to fetch category and type IDs if they are not in the publication object
+    });
   }
 
   closeModal(): void {
@@ -70,6 +109,7 @@ export class PublicationCrudComponent implements OnInit {
     this.submitted = false;
     this.coverImageFile = null;
     this.pdfFile = null;
+    this.currentPublicationId = null;
   }
 
   onCoverImageSelected(event: Event): void {
@@ -91,8 +131,12 @@ export class PublicationCrudComponent implements OnInit {
     this.successMessage = '';
     this.errorMessage = '';
 
-    if (this.publicationForm.invalid || !this.coverImageFile || !this.pdfFile) {
+    if (this.publicationForm.invalid) {
       return;
+    }
+    
+    if (!this.isEditMode && (!this.coverImageFile || !this.pdfFile)) {
+        return;
     }
 
     const formValue = this.publicationForm.value as PublicationFormValue;
@@ -102,21 +146,60 @@ export class PublicationCrudComponent implements OnInit {
     formData.append('typeId', formValue.typeId);
     formData.append('title', formValue.title);
     formData.append('description', formValue.description);
-    formData.append('coverImage', this.coverImageFile);
-    formData.append('pdfFile', this.pdfFile);
+    if (this.coverImageFile) {
+      formData.append('coverImage', this.coverImageFile);
+    }
+    if (this.pdfFile) {
+      formData.append('pdfFile', this.pdfFile);
+    }
 
-    this.publicationService.createPublication(formData).subscribe({
-      next: () => {
-        this.successMessage = 'Publication added successfully!';
-        this.publicationForm.reset();
-        this.submitted = false;
-        this.coverImageFile = null;
-        this.pdfFile = null;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to add publication. Please try again.';
-        console.error(err);
-      }
-    });
+    if (this.isEditMode && this.currentPublicationId) {
+      this.publicationService.updatePublication(this.currentPublicationId, formData).subscribe({
+        next: () => {
+          this.successMessage = 'Publication updated successfully!';
+          if (this.selectedCategoryId && this.selectedTypeId) {
+            this.loadPublicationsByCategoryAndType(this.selectedCategoryId, this.selectedTypeId);
+          } else if (this.selectedCategoryId) {
+            this.loadPublicationsByCategory(this.selectedCategoryId);
+          }
+          this.closeModal();
+        },
+        error: (err) => {
+          this.errorMessage = 'Failed to update publication. Please try again.';
+          console.error(err);
+        }
+      });
+    } else {
+      this.publicationService.createPublication(formData).subscribe({
+        next: () => {
+          this.successMessage = 'Publication added successfully!';
+          if (this.selectedCategoryId && this.selectedTypeId) {
+            this.loadPublicationsByCategoryAndType(this.selectedCategoryId, this.selectedTypeId);
+          } else if (this.selectedCategoryId) {
+            this.loadPublicationsByCategory(this.selectedCategoryId);
+          }
+          this.closeModal();
+        },
+        error: (err) => {
+          this.errorMessage = 'Failed to add publication. Please try again.';
+          console.error(err);
+        }
+      });
+    }
+  }
+
+  deletePublication(id: number): void {
+    if (confirm('Are you sure you want to delete this publication?')) {
+      this.publicationService.deletePublication(id).subscribe({
+        next: () => {
+          if (this.selectedCategoryId && this.selectedTypeId) {
+            this.loadPublicationsByCategoryAndType(this.selectedCategoryId, this.selectedTypeId);
+          } else if (this.selectedCategoryId) {
+            this.loadPublicationsByCategory(this.selectedCategoryId);
+          }
+        },
+        error: err => console.error('Failed to delete publication', err)
+      });
+    }
   }
 }

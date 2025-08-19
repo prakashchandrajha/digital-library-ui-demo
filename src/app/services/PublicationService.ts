@@ -57,4 +57,16 @@ createPublication(formData: FormData): Observable<Publication> {
   return this.http.post<Publication>(`${this.apiUrl}/publications`, formData);
 }
 
+getPublicationsByType(typeId: number): Observable<Publication[]> {
+  return this.http.get<Publication[]>(`${this.apiUrl}/publications/type/${typeId}`);
+}
+
+updatePublication(id: number, formData: FormData): Observable<Publication> {
+  return this.http.put<Publication>(`${this.apiUrl}/publications/${id}`, formData);
+}
+
+deletePublication(id: number): Observable<void> {
+  return this.http.delete<void>(`${this.apiUrl}/publications/${id}`);
+}
+
 }
