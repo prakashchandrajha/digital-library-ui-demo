@@ -18,6 +18,8 @@ export class AuthPage {
   }
 
   public register(): void {
-    this.keycloak.register();
+    this.keycloak.register({
+      redirectUri: window.location.origin + '/intro'
+    });
   }
 }
