@@ -18,16 +18,16 @@ export class IntroPageComponent {
 
 
    profileIcons = [
-    { img: '../../../assets/images/ss9.jpg', position: 'left-[45px] -top-[4px]' },
-    { img: '../../../assets/images/ss7.jpg', position: 'right-[45px] -top-[4px]' },
-    { img: '../../../assets/images/ss5.jpg', position: '-left-4 top-20' },
-    { img: '../../../assets/images/ss4.jpg', position: '-right-4 top-20' },
-    { img: '../../../assets/images/ss3.jpg', position: 'bottom-8 -left-0' },
-    { img: '../../../assets/images/ss2.jpg', position: 'bottom-8 -right-0' },
-    { img: '../../../assets/images/ss1.jpg', position: 'right-[40%] -bottom-4' }
+    { img: '../../../assets/images/c2.png', position: 'left-[45px] -top-[4px]' },
+    { img: '../../../assets/images/c3.png', position: 'right-[45px] -top-[4px]' },
+    { img: '../../../assets/images/c6.png', position: '-left-4 top-20' },
+    { img: '../../../assets/images/c7.png', position: '-right-4 top-20' },
+    { img: '../../../assets/images/c3.png', position: 'bottom-8 -left-0' },
+    { img: '../../../assets/images/c2.png', position: 'bottom-8 -right-0' },
+    { img: '../../../assets/images/c6.png', position: 'right-[40%] -bottom-4' }
   ];
 
-  centerImage = '../../../assets/images/ss6.jpg';
+  centerImage = '../../../assets/images/c4.png';
 
   public logout(): void {
     this.keycloak.logout(window.location.origin + '/auth');

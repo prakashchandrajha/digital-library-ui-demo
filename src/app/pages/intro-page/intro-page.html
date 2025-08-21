@@ -14,8 +14,8 @@
         <div class="text-center lg:text-left lg:w-1/2">
           <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight font-[Times_New_Roman]">
             Smart
-            <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">
-              Digital Library
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500 ">
+              Digital <span class="typewriter">Library</span>
             </span>
             System
           </h1>
@@ -50,13 +50,16 @@
               <!-- Main Center -->
               <button class="profile_item w-[200px] h-[200px] p-1 border-2 rounded-full border-pink-400/50
                      hover:border-pink-300/50 transition-all duration-500">
-                <div class="w-full bg-white h-full flex items-center justify-center p-2 rounded-full
+  <div class="w-full bg-white h-full flex items-center justify-center p-2 rounded-full
                     hover:scale-95 transition-all duration-500">
-                  <span class="w-22 h-25 inline-block">
-                    <img [src]="centerImage" class="w-full h-full object-contain rounded-full" alt="Image">
-                  </span>
-                </div>
-              </button>
+    <span class="w-22 h-25 inline-block">
+      <img [src]="centerImage" 
+           class="w-full h-full object-contain rounded-full mt-[-16px] ml-[14px]" 
+           alt="Image">
+    </span>
+  </div>
+</button>
+
             </div>
           </div>
         </div>
@@ -86,7 +89,7 @@
 
 
 
-    <app-category-component mt-20></app-category-component>
+    <app-category mt-20></app-category>
     <app-digital-libary-about-component></app-digital-libary-about-component>
   </main>
 </div>
