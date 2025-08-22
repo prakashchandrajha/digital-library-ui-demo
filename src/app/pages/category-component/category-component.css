@@ -1,16 +1,50 @@
 /* Hover Effect for Zoom */
-  .card-hover:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  .card-hover {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  /* Ensure Dropdown Doesn't Hide Navigation */
-  .dropdown-menu {
-    z-index: 1050 !important;
-    position: absolute;
-  }
-  .navbar {
-    z-index: 1060 !important;
-  }
+.card-hover:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-hover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Ensure Dropdown Doesn't Hide Navigation */
+.dropdown-menu {
+  z-index: 1050 !important;
+  position: absolute;
+}
+
+.navbar {
+  z-index: 1060 !important;
+}
+
+/* Swiper Styles */
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ff6b6b;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ff6b6b;
+}

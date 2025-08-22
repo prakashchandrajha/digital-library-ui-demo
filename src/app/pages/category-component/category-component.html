@@ -36,7 +36,7 @@
   </div>
 </div>
 -->
-
+<!--
 <div class="flex gap-6 overflow-x-auto p-4" >
   <div 
     *ngFor="let c of categories; index as i" 
@@ -50,7 +50,7 @@
              before:-skew-x-12 before:rounded-2xl before:absolute before:content-[''] 
              before:bg-pink-100 before:right-3 before:top-0 before:w-72 before:h-32 before:-z-10"
     >
-      <!-- Category Image -->
+     
       <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg">
         <img 
           [src]="c.imageUrl" 
@@ -59,11 +59,51 @@
         />
       </div>
 
-      <!-- Category Name -->
+      
       <h3 class="text-lg font-semibold text-amber-600"  >
         {{ c.name | uppercase }}
       </h3>
     </div>
   </div>
+</div>
+-->
+<!-- Category Slider with Swiper Styles -->
+<div class="swiper p-4">
+  <div class="swiper-wrapper">
+    <div
+      *ngFor="let c of categories; index as i"
+      class="swiper-slide group duration-500 hover:-skew-x-0 skew-x-6 hover:translate-x-2 flex-shrink-0"
+      [routerLink]="['/category', c.id, 'details']"
+    >
+      <div
+        class="group-hover:duration-400 relative rounded-2xl w-72 h-36
+               bg-gradient-to-r from-pink-200 via-pink-300 to-red-300
+               text-gray-900 flex flex-col justify-center items-center gap-2
+               before:-skew-x-12 before:rounded-2xl before:absolute before:content-['']
+               before:bg-pink-100 before:right-3 before:top-0 before:w-72 before:h-32 before:-z-10"
+      >
+        <!-- Category Image -->
+        <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg">
+          <img
+            [src]="c.imageUrl"
+            alt="{{ c.name }}"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Category Name -->
+        <h3 class="text-lg font-semibold text-amber-600">
+          {{ c.name | uppercase }}
+        </h3>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Navigation Arrows -->
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+  
+  <!-- Pagination -->
+  <div class="swiper-pagination"></div>
 </div>
 
