@@ -77,13 +77,14 @@
     >
       <div
         class="group-hover:duration-400 relative rounded-2xl w-72 h-36
-               bg-gradient-to-r from-pink-200 via-pink-300 to-red-300
+               bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300
                text-gray-900 flex flex-col justify-center items-center gap-2
+               shadow-md hover:shadow-xl transition-shadow
                before:-skew-x-12 before:rounded-2xl before:absolute before:content-['']
-               before:bg-pink-100 before:right-3 before:top-0 before:w-72 before:h-32 before:-z-10"
+               before:bg-gray-200 before:right-3 before:top-0 before:w-72 before:h-32 before:-z-10"
       >
         <!-- Category Image -->
-        <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg">
+        <div class="w-24 h-24 rounded-full overflow-hidden shadow-lg border border-gray-500">
           <img
             [src]="c.imageUrl"
             alt="{{ c.name }}"
@@ -92,7 +93,7 @@
         </div>
 
         <!-- Category Name -->
-        <h3 class="text-lg font-semibold text-amber-600">
+        <h3 class="text-lg font-semibold text-gray-700 group-hover:text-gray-900">
           {{ c.name | uppercase }}
         </h3>
       </div>
@@ -100,10 +101,13 @@
   </div>
   
   <!-- Navigation Arrows -->
-  <div class="swiper-button-next"></div>
-  <div class="swiper-button-prev"></div>
+  <!-- <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div> -->
   
   <!-- Pagination -->
-  <div class="swiper-pagination"></div>
+   <div class="mt-10">
+  <div class="swiper-pagination "></div>
+  </div>
 </div>
+
 

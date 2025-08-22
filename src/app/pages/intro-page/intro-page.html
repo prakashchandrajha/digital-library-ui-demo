@@ -3,7 +3,7 @@
 
 
 
-<div>
+<div class="">
 
   <main class="text-gray-900">
 
@@ -50,15 +50,14 @@
               <!-- Main Center -->
               <button class="profile_item w-[200px] h-[200px] p-1 border-2 rounded-full border-pink-400/50
                      hover:border-pink-300/50 transition-all duration-500">
-  <div class="w-full bg-white h-full flex items-center justify-center p-2 rounded-full
+                <div class="w-full bg-white h-full flex items-center justify-center p-2 rounded-full
                     hover:scale-95 transition-all duration-500">
-    <span class="w-22 h-25 inline-block">
-      <img [src]="centerImage" 
-           class="w-full h-full object-contain rounded-full mt-[-16px] ml-[14px]" 
-           alt="Image">
-    </span>
-  </div>
-</button>
+                  <span class="w-22 h-25 inline-block">
+                    <img [src]="centerImage" class="w-full h-full object-contain rounded-full mt-[-16px] ml-[14px]"
+                      alt="Image">
+                  </span>
+                </div>
+              </button>
 
             </div>
           </div>
@@ -70,30 +69,81 @@
     </section>
 
     <div class="flex items-center justify-center my-10">
-  <!-- Left Gradient Line -->
-  <span class="h-px flex-1 bg-gradient-to-r from-transparent to-gray-300 dark:to-gray-600"></span>
+      <!-- Left Gradient Line -->
+      <span class="h-px flex-1 bg-gradient-to-r from-transparent to-gray-300 dark:to-gray-600"></span>
 
-  <!-- Image + Text Together -->
-  <h2 class="flex items-center gap-3 shrink-0 px-6 text-4xl lg:text-6xl font-extrabold text-center">
-    <img src="../../../assets/images/ccc.png" alt="" class="h-6 w-6 object-contain">
-    <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">
-      CATEGORIES
-    </span>
-  </h2>
+      <!-- Image + Text Together -->
+      <h2 class="flex items-center gap-3 shrink-0 px-6 text-4xl lg:text-6xl font-extrabold text-center">
+        <img src="../../../assets/images/ccc.png" alt="" class="h-6 w-6 object-contain">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">
+          CATEGORIES
+        </span>
+      </h2>
 
-  <!-- Right Gradient Line -->
-  <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gray-300 dark:to-gray-600"></span>
-</div>
+      <!-- Right Gradient Line -->
+      <span class="h-px flex-1 bg-gradient-to-l from-transparent to-gray-300 dark:to-gray-600"></span>
+    </div>
 
 
 
-<app-category-component></app-category-component>
-
+    <app-category-component></app-category-component>
     
-    <app-digital-libary-about-component></app-digital-libary-about-component>
+    <div class="py-12 sm:py-24">
+        
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        
+
+        <div class="mx-auto max-w-2xl text-center">
+
+        
+
+        </div>
+        <div class="mt-10 flow-root sm:mt-20">
+          <div
+            class="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+            <!-- Photo by '@tvick' on Unsplash -->
+            <img src="../../../assets/images/bnr.png" width="2432" height="1442"
+              class="rounded-md shadow-2xl ring-1 ring-gray-900/10">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <app-digital-libary-about-component title="Revolutionize Your Knowledge Access"
+  subtitle="DIGITAL INNOVATION"
+  description="Our Smart Digital Library System transforms how you interact with knowledge..."
+  [features]="[
+    'Intuitive search with AI-powered recommendations',
+    'Secure cloud-based access from any device',
+    'Personalized reading lists and annotations'
+  ]"
+  image="../../../assets/images/bnr3.png"
+  highlightValue="10,000+"
+  highlightLabel="Digital Resources"
+  titleClass="bg-gradient-to-r from-pink-500 to-red-500 bg-clip-text text-transparent"
+  subtitleClass="font-medium tracking-wider text-red-500"
+  descClass="mt-8 text-lg text-gray-600 leading-relaxed"></app-digital-libary-about-component>
+
+    <app-digital-libary-about-component  title="Your Personal E-Library Hub"
+  subtitle="KNOWLEDGE UNLEASHED"
+  description="Discover a world where knowledge knows no boundaries..."
+  [features]="[
+    'Cross-platform accessibility',
+    'Personalized recommendations',
+    'Advanced search filters',
+    'Offline reading capability'
+  ]"
+  image="../../../assets/images/bnr2.png"
+  highlightValue="24/7"
+  highlightLabel="Accessibility"
+  [reverse]="true"
+  titleClass="bg-gradient-to-r from-blue-500 to-indigo-500 bg-clip-text text-transparent"
+  subtitleClass="font-medium tracking-wider text-blue-600"
+  descClass="mt-8 text-lg text-indigo-700 leading-relaxed"></app-digital-libary-about-component>
   </main>
 </div>
 
 <app-footer></app-footer>
 
-<!-- From Uiverse.io by Javierrocadev --> 
+<!-- From Uiverse.io by Javierrocadev -->

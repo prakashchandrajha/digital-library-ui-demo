@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 
 // Swiper imports
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 @Component({
   selector: 'app-category-component',
@@ -39,9 +40,14 @@ export class CategoryComponent implements AfterViewInit {
   private initSwiper(): void {
     if (typeof Swiper !== 'undefined') {
       this.swiperInstance = new Swiper('.swiper', {
-        modules: [Navigation, Pagination],
+        modules: [Navigation, Pagination, Autoplay],
         slidesPerView: 3,
         spaceBetween: 30,
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
