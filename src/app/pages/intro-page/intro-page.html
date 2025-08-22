@@ -31,35 +31,38 @@
 
 
         <!-- Right Graphic -->
-        <div class="lg:w-1/2 flex justify-center items-center mt-10 lg:mt-0">
+        <div class="lg:w-1/2 flex justify-center items-center  lg:mt-0">
           <div class="relative h-full w-full flex items-center justify-center">
-            <div
-              class="profileCard_container relative p-10 border-2 border-dashed rounded-full border-spacing-4 border-pink-400/50">
+            <!-- From Uiverse.io by ilkhoeri --> 
+<div class="wrapper">
+  <div class="inner" style="--quantity: 10;">
+    <div class="card" style="--index: 0;--color-card: 142, 249, 252;">
+      <div class="img">
+        <img src="../../../assets/images/aa.png" alt="">
+      </div>
+    </div>
+    <div class="card" style="--index: 1;--color-card: 142, 252, 204;">
+      <div class="img"></div>
+    </div>
+    <div class="card" style="--index: 2;--color-card: 142, 252, 157;">
+      <div class="img"></div>
+    </div>
+    <div class="card" style="--index: 3;--color-card: 215, 252, 142;">
+      <div class="img"></div>
+    </div>
+    <div class="card" style="--index: 4;--color-card: 252, 252, 142;">
+      <div class="img"></div>
+    </div>
+    <div class="card" style="--index: 5;--color-card: 252, 208, 142;">
+      <div class="img"></div>
+    </div>
+    <div class="card" style="--index: 6;--color-card: 252, 142, 142;">
+      <div class="img"></div>
+    </div>
+    
+  </div>
+</div>
 
-              <!-- Loop Small Icons -->
-              @for (icon of profileIcons; track $index) {
-              <button class="profile_item absolute rounded-full border border-pink-300/50 p-[2px]
-                       hover:scale-95 transition-all duration-500
-                       bg-gradient-to-r from-pink-500 to-orange-500" [ngClass]="icon.position">
-                <span class="block w-[40px] h-[40px] rounded-full bg-white p-1">
-                  <img [src]="icon.img" class="w-full h-full object-contain rounded-full" alt="Image">
-                </span>
-              </button>
-              }
-
-              <!-- Main Center -->
-              <button class="profile_item w-[200px] h-[200px] p-1 border-2 rounded-full border-pink-400/50
-                     hover:border-pink-300/50 transition-all duration-500">
-                <div class="w-full bg-white h-full flex items-center justify-center p-2 rounded-full
-                    hover:scale-95 transition-all duration-500">
-                  <span class="w-22 h-25 inline-block">
-                    <img [src]="centerImage" class="w-full h-full object-contain rounded-full mt-[-16px] ml-[14px]"
-                      alt="Image">
-                  </span>
-                </div>
-              </button>
-
-            </div>
           </div>
         </div>
 
