@@ -1,59 +1,100 @@
-/* Wrapper to center the 3D carousel */
-.wrapper {
-  width: 100%;
-  height: 100vh;
+/* From Uiverse.io by Smit-Prajapati */ 
+.loader {
+  --size: 250px;
+  --duration: 2s;
+  --logo-color: grey;
+  --background: linear-gradient(
+    0deg,
+    rgba(50, 50, 50, 0.2) 0%,
+    rgba(100, 100, 100, 0.2) 100%
+  );
+  height: var(--size);
+  aspect-ratio: 1;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1200px; /* enhance 3D effect */
-  overflow: hidden;
 }
 
-/* Inner carousel container */
-.inner {
-  --w: 100px;
-  --h: 150px;
-  --translateZ: 300px; /* distance from center */
-  --rotateX: -15deg;
-  position: relative;
-  width: var(--w);
-  height: var(--h);
-  transform-style: preserve-3d;
-  animation: rotating 20s linear infinite;
+.loader .box {
+  position: absolute;
+  background: rgba(100, 100, 100, 0.15);
+  background: var(--background);
+  border-radius: 50%;
+  border-top: 1px solid rgba(100, 100, 100, 1);
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px -0px;
+  backdrop-filter: blur(5px);
+  animation: ripple var(--duration) infinite ease-in-out;
 }
 
-/* Rotating animation */
-@keyframes rotating {
-  from {
-    transform: rotateX(var(--rotateX)) rotateY(0deg);
-  }
-  to {
-    transform: rotateX(var(--rotateX)) rotateY(360deg);
-  }
+.loader .box:nth-child(1) {
+  inset: 40%;
+  z-index: 99;
 }
 
-/* Individual cards */
-.card {
+.loader .box:nth-child(2) {
+  inset: 30%;
+  z-index: 98;
+  border-color: rgba(100, 100, 100, 0.8);
+  animation-delay: 0.2s;
+}
+
+.loader .box:nth-child(3) {
+  inset: 20%;
+  z-index: 97;
+  border-color: rgba(100, 100, 100, 0.6);
+  animation-delay: 0.4s;
+}
+
+.loader .box:nth-child(4) {
+  inset: 10%;
+  z-index: 96;
+  border-color: rgba(100, 100, 100, 0.4);
+  animation-delay: 0.6s;
+}
+
+.loader .box:nth-child(5) {
+  inset: 0%;
+  z-index: 95;
+  border-color: rgba(100, 100, 100, 0.2);
+  animation-delay: 0.8s;
+}
+
+.loader .logo {
   position: absolute;
   inset: 0;
-  border: 2px solid rgba(var(--color-card), 1);
-  border-radius: 12px;
-  background: rgba(0,0,0,0); /* fully transparent background */
-  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) 
-             translateZ(var(--translateZ));
-  box-shadow: 0 0 20px rgba(var(--color-card), 0.3); /* soft glow */
+  display: grid;
+  place-content: center;
+  padding: 30%;
 }
 
-/* Card inner element */
-.img {
+.loader .logo svg {
+  fill: var(--logo-color);
   width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  background: radial-gradient(
-    circle,
-    rgba(var(--color-card), 0.1) 0%,
-    rgba(var(--color-card), 0.3) 70%,
-    rgba(var(--color-card), 0.5) 100%
-  );
+  animation: color-change var(--duration) infinite ease-in-out;
 }
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px -0px;
+  }
+  50% {
+    transform: scale(1.3);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 30px 20px -0px;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 10px -0px;
+  }
+}
+
+@keyframes color-change {
+  0% {
+    fill: var(--logo-color);
+  }
+  50% {
+    fill: white;
+  }
+  100% {
+    fill: var(--logo-color);
+  }
+}
+
