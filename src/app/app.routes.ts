@@ -5,39 +5,24 @@ import { AuthGuard } from './auth.guard';
 import { CategoryDetailComponent } from './pages/category-detail-component/category-detail-component';
 import { AdminDashboardComponent } from './admin/admin-dashboard-component/admin-dashboard-component';
 import { AdminDashboardContent } from './admin/admin-dashboard-content/admin-dashboard-content';
-import { UserCrudComponent } from './admin/user-crud-component/user-crud-component';
 import { CategoryCrudComponent } from './admin/category-crud-component/category-crud-component';
 import { PublicationCrudComponent } from './admin/publication-crud-component/publication-crud-component';
 import { AboutComponent } from './pages/about-component/about-component';
 import { ContactComponent } from './pages/contact-component/contact-component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  // Intro page shown first
+  { path: '', redirectTo: '/intro', pathMatch: 'full' },
+
+  // Public routes
+  { path: 'intro', component: IntroPageComponent },
   { path: 'auth', component: AuthPage },
-  {
-    path: 'intro',
-    component: IntroPageComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'category/:id/details',
-    component: CategoryDetailComponent
-  },
-  {
-    path: 'home',
-    component: IntroPageComponent,
-    canActivate: [AuthGuard]
-  },
-   {
-    path: 'about',
-    component: AboutComponent,
-    canActivate: [AuthGuard]
-  },
-   {
-    path: 'contact',
-    component: ContactComponent,
-    canActivate: [AuthGuard]
-  },
+  { path: 'category/:id/details', component: CategoryDetailComponent },
+  { path: 'home', component: IntroPageComponent },  // If you have a separate home page, change this
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
+
+  // Protected admin routes
   {
     path: 'admin',
     component: AdminDashboardComponent,
@@ -45,7 +30,6 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardContent },
-      { path: 'users', component: UserCrudComponent },
       { path: 'category', component: CategoryCrudComponent },
       { path: 'publication', component: PublicationCrudComponent }
     ]

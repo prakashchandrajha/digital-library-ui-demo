@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Category, CategoryService } from '../../services/category-service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,8 +10,10 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   templateUrl: './category-crud-component.html',
   styleUrl: './category-crud-component.css'
 })
-export class CategoryCrudComponent implements OnInit {
+export class CategoryCrudComponent implements OnInit, OnDestroy {
   isModalOpen = false;
+  isDeleteModalOpen = false; // For delete confirmation
+  deletingCategoryId: number | null = null; // To store which category to delete
   categoryForm!: FormGroup;
   categories: Category[] = [];
   selectedFile!: File;
@@ -24,14 +26,29 @@ editingId: number | null = null; // <-- ADD THIS
   ngOnInit() {
     this.categoryForm = this.fb.group({
       name: ['', Validators.required],
-      thumbnail: [null, Validators.required]
+      thumbnail: [null] // Validator removed
     });
     this.loadCategories();
   }
 
   loadCategories() {
     this.categoryService.getAll().subscribe({
-      next: (data) => this.categories = data,
+      next: (data) => {
+        this.categories = data;
+        this.categories.forEach(category => {
+          if (category.id) { // Ensure there is an ID
+            this.categoryService.getThumbnail(category.id).subscribe({
+              next: (blob) => {
+                category.imageUrl = URL.createObjectURL(blob);
+              },
+              error: (err) => {
+                console.error(`Error loading thumbnail for category ${category.id}`, err);
+                category.imageUrl = 'assets/images/image.png'; // Fallback image
+              }
+            });
+          }
+        });
+      },
       error: (err) => console.error('Error loading categories', err)
     });
   }
@@ -44,6 +61,7 @@ editingId: number | null = null; // <-- ADD THIS
     this.isModalOpen = false;
     this.categoryForm.reset();
     this.selectedFile = undefined as any;
+    this.editingId = null; // Reset editing state
   }
 
   onFileSelected(event: Event) {
@@ -65,7 +83,8 @@ editingId: number | null = null; // <-- ADD THIS
 }
 
 saveCategory() {
-  if (this.categoryForm.invalid) return;
+  if (this.categoryForm.get('name')?.invalid) return;
+
   const { name } = this.categoryForm.value;
 
   if (this.editingId) {
@@ -73,32 +92,85 @@ saveCategory() {
     this.categoryService.update(this.editingId, name, this.selectedFile).subscribe({
       next: (updated) => {
         const index = this.categories.findIndex(c => c.id === updated.id);
-        if (index > -1) this.categories[index] = updated;
-        this.editingId = null;
+        if (index > -1) {
+          // Preserve the existing imageUrl if a new one wasn't uploaded
+          const oldImageUrl = this.categories[index].imageUrl;
+          this.categories[index] = updated;
+          if (!this.selectedFile) {
+            this.categories[index].imageUrl = oldImageUrl;
+          } else {
+            // If a new file was uploaded, we need to refresh the image
+            this.categoryService.getThumbnail(updated.id).subscribe(blob => {
+              URL.revokeObjectURL(oldImageUrl as string); // Clean up old blob url
+              this.categories[index].imageUrl = URL.createObjectURL(blob);
+            });
+          }
+        }
         this.closeModal();
       },
       error: (err) => console.error('Error updating category:', err)
     });
   } else {
-    // Create new category
+    // Create new category - enforce thumbnail presence
+    if (!this.selectedFile) {
+      alert('Thumbnail is required for a new category.');
+      return;
+    }
     this.categoryService.create(name, this.selectedFile).subscribe({
       next: (res) => {
-        this.categories.push(res);
-        this.closeModal();
+        // Fetch the new thumbnail to display it
+        this.categoryService.getThumbnail(res.id).subscribe(blob => {
+          res.imageUrl = URL.createObjectURL(blob);
+          this.categories.push(res);
+          this.closeModal();
+        });
       },
       error: (err) => console.error('Error creating category:', err)
     });
   }
 }
 
-deleteCategory(id: number) {
-  if (!confirm('Are you sure you want to delete this category?')) return;
+  // Step 1: Open the delete confirmation modal
+  deleteCategory(id: number) {
+    this.deletingCategoryId = id;
+    this.isDeleteModalOpen = true;
+  }
 
-  this.categoryService.delete(id).subscribe({
-    next: () => {
-      this.categories = this.categories.filter(c => c.id !== id);
-    },
-    error: (err) => console.error('Error deleting category:', err)
+  // Step 2: Close the modal if deletion is canceled
+  cancelDelete() {
+    this.isDeleteModalOpen = false;
+    this.deletingCategoryId = null;
+  }
+
+  // Step 3: Perform the deletion if confirmed
+  confirmDelete() {
+    if (!this.deletingCategoryId) return;
+
+    const categoryToDelete = this.categories.find(c => c.id === this.deletingCategoryId);
+
+    this.categoryService.delete(this.deletingCategoryId).subscribe({
+      next: () => {
+        // Revoke the blob URL to prevent memory leaks
+        if (categoryToDelete && categoryToDelete.imageUrl && categoryToDelete.imageUrl.startsWith('blob:')) {
+          URL.revokeObjectURL(categoryToDelete.imageUrl);
+        }
+        
+        this.categories = this.categories.filter(c => c.id !== this.deletingCategoryId);
+        this.cancelDelete(); // Close modal and reset state
+      },
+      error: (err) => {
+        console.error('Error deleting category:', err);
+        this.cancelDelete(); // Close modal and reset state even on error
+      }
+    });
+  }
+
+ngOnDestroy() {
+  // Revoke the object URLs to avoid memory leaks
+  this.categories.forEach(category => {
+    if (category.imageUrl && category.imageUrl.startsWith('blob:')) {
+      URL.revokeObjectURL(category.imageUrl);
+    }
   });
 }
 

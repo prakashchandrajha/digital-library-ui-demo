@@ -34,6 +34,11 @@ export class CategoryService {
     return this.http.post<Category>(this.apiUrl, formData);
   }
 
+  // GET: Get category by ID
+  getById(id: number): Observable<Category> {
+    return this.http.get<Category>(`${this.apiUrl}/${id}`);
+  }
+
   // GET: Get thumbnail image as blob
   getThumbnail(id: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/${id}/thumbnail`, {
